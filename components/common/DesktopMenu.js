@@ -31,10 +31,10 @@ const DesktopMenu = ({ setContract }) => {
         <DesktopNavButton targetElementId="lore" label="LORE" />
         <DesktopNavButton targetElementId="roadmap" label="ROADMAP" />
         <DesktopNavButton targetElementId="team" label="TEAM" />
-        <li className={styles.disabledMenuBtn}>
-          {/* <a href="" target="_blank"> */}
+        <li className={styles.menuBtn}>
+          <a href="https://crn-wallet.netlify.app/" target="_blank">
             MY WALLET
-          {/* </a> */}
+          </a>
         </li>
         <DesktopNavButton targetElementId="faq" label="FAQ" />
       </HStack>
