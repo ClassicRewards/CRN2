@@ -37,7 +37,7 @@ const Footer = ({}) => {
 								backgroundColor="#0B3552"
 								w="90%"
 								h="30px"
-								onClick={() => navigator.clipboard.writeText("0x288F79cd26AaebCB3dd80f8FDb6904c8b1dBea74")}
+								onClick={() => navigator.clipboard.writeText("0x0cC7f43A7FBBa594b57C9676ccc2ade02eb62D29")}
 							>
 								click to copy
 							</Button>
