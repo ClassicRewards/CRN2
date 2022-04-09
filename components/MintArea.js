@@ -161,7 +161,7 @@ export function MintArea({ contract }) {
             )}
           </Center>
           <Text color="red" fontSize="md">
-            Max 25 tokens!
+            Max 25 tokens!  If nothing happens, make sure you have enough BNB to purchase an NFT (0.25 BNB).
           </Text>
         </Box>
       </Center>
