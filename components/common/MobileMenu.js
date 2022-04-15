@@ -80,7 +80,7 @@ const MobileMenu = ({ setContract }) => {
                 </ListItem>
                 <MobileNavButton targetElementId="mint" label="MINT" onClose={onClose} />
                 <ListItem mb={3}>
-                  <a href="https://github.com/AuditRateTech/Smart-Contract-Audits/blob/main/Classic_Rewards_NFT_0x288F79cd26AaebCB3dd80f8FDb6904c8b1dBea74.pdf" target="_blank">
+                  <a href="https://github.com/AuditRateTech/Smart-Contract-Audits/blob/main/Classic_Rewards_Binance_NFT_0x0cC7f43A7FBBa594b57C9676ccc2ade02eb62D29.pdf" target="_blank">
                     BNB AUDIT
                   </a>
                 </ListItem>
