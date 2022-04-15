@@ -97,6 +97,19 @@ export function MintArea({ contract }) {
             Connect your wallet!
           </Text>
         )}
+        <Box w={'330px'} display={'flex'} justifyContent="center">
+          <Button
+            align="center"
+            color="#C66CFF"
+            border="1px solid #C66CFF"
+            backgroundColor="#0B3552"
+            w="100%"
+            h="30px"
+            onClick={() => window.open("https://youtu.be/gsQjNbhFQ3k")}
+          >
+            How to mint on mobile
+          </Button>
+        </Box>
         <Box
           bg="linear-gradient(180deg, #362073, #190d35)"
           style={{
