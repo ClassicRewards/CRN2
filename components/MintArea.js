@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import keccak256 from "keccak256";
 import MerkleTree from "merkletreejs";
-import { Center, Input, Button, Box, Heading, Text } from "@chakra-ui/react";
+import { Center, Input, Button, Box, Text, Divider, Flex } from "@chakra-ui/react";
 import { ToastContainer, toast } from "react-toastify";
 import ReactLoading from "react-loading";
 import "react-toastify/dist/ReactToastify.css";
@@ -97,7 +97,7 @@ export function MintArea({ contract }) {
             Connect your wallet!
           </Text>
         )}
-        <Box w={'330px'} display={'flex'} justifyContent="center">
+        <Box w={["350px", , , ,"450px"]} display={'flex'} justifyContent="center">
           <Button
             align="center"
             color="#C66CFF"
@@ -112,70 +112,92 @@ export function MintArea({ contract }) {
         </Box>
         <Box
           bg="linear-gradient(180deg, #362073, #190d35)"
+          w={["350px", , , ,"450px"]}
           style={{
             boxShadow:
               "0 20px 20px rgba(66, 32, 111, 0.2), 0px 0px 50px rgba(66, 32, 111, 0.3)",
             borderRadius: "0.8rem",
-            width: "330px",
-            height: "230px",
+            height: "430px",
           }}
         >
-          <Center
-            h="100%"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <Heading
-              as="h1"
-              fontSize={["48px", , , , "60px"]}
-              color="#C66CFF"
-              style={{ marginBottom: "3rem" }}
-            >
-              {contract ? totalSupply : "--"} / {MAX_SUPPLY}
-            </Heading>
-            <Box style={{ marginBottom: "10px" }}>
-              <Input
-                value={amount}
-                onChange={handleInput}
-                focusBorderColor="#C66CFF"
-                placeholder="1"
-                type="number"
-                w="70px"
-                h="50px"
-                style={{ marginRight: "0.6rem", textAlign: "center" }}
-              />
-              <Button
-                align="center"
-                color="#C66CFF"
-                border="1px solid #C66CFF"
-                backgroundColor="#0B3552"
-                w="100px"
-                h="50px"
-                onClick={() => onMint(amount)}
-                disabled={
-                  isPaused ||
-                  contract == null ||
-                  totalSupply === MAX_SUPPLY ||
-                  amount > 25
-                }
-              >
-                {mintMore ? "MINT MORE" : "MINT"}
-              </Button>
+          <Box>
+            <Center>
+              <Box>
+                <Text textStyle="paragraph" fontWeight={'bold'} fontSize={'40px'}>Warrior Minting</Text>
+                <Flex justifyContent={'center'}>
+                  <Text textStyle="paragraph" fontWeight={'bold'} fontSize={'24px'} m={'0px 5px'}>Price:</Text>
+                  <Text textStyle="paragraph" fontWeight={'bold'} fontSize={'24px'} m={'0px 5px'} color={'#C66CFF'}>0.25 BNB</Text>
+                </Flex>
+                <Flex justifyContent={'center'}>
+                  <Text textStyle="paragraph" fontWeight={'bold'} fontSize={'40px'} color={'#C66CFF'}>{contract ? totalSupply : "--"} / {MAX_SUPPLY}</Text>
+                </Flex>
+              </Box>
+            </Center>
+            <Center>
+              <Divider w={'90%'} m={'10px 0px'} borderRadius={'8px'} borderStyle={'none'} backgroundColor={'#75A7D3'} height={'15px'}/>
+            </Center>
+            <Box display={'flex'} flexDirection={'row'} m={'10px 0px 15px 0px'}>
+              <Box w={'50%'} display={'flex'} flexDirection={'column'} alignItems={'center'}>
+                <Text textStyle="paragraph" w={'auto'}>Enter Amount</Text>
+                <Input
+                  value={amount}
+                  onChange={handleInput}
+                  focusBorderColor="#C66CFF"
+                  placeholder="1"
+                  type="number"
+                  w="140px"
+                  h="45px"
+                  borderRadius={'16px'}
+                  textAlign={'center'}
+                />
+              </Box>
+              <Box w={'50%'} display={'flex'} flexDirection={'column'} alignItems={'center'}>
+                <Text textStyle="paragraph" >Click to Mint</Text>
+                <Button
+                  align="center"
+                  color="#C66CFF"
+                  border="1px solid #C66CFF"
+                  backgroundColor="#0B3552"
+                  w="140px"
+                  h="45px"
+                  onClick={() => onMint(amount)}
+                  borderRadius={'16px'}
+                  disabled={ isPaused || contract == null || totalSupply === MAX_SUPPLY || amount > 25 }
+                >
+                  {mintMore ? "MINT MORE" : "MINT"}
+                </Button>
+              </Box>
             </Box>
-            {loadingTx && (
-              <ReactLoading
-                type={"spin"}
-                color={"#C66CFF"}
-                height={"10%"}
-                width={"10%"}
-              />
-            )}
-          </Center>
-          <Text color="red" fontSize="md">
-            Max 25 tokens!  If nothing happens, make sure you have enough BNB to purchase an NFT (0.25 BNB).
-          </Text>
+            <Center>
+              <Divider w={'90%'} m={'10px 0px'} borderRadius={'8px'} borderStyle={'none'} backgroundColor={'#75A7D3'} height={'15px'}/>
+            </Center>
+            <Center flexDirection={'column'} m={'10px 0px'}>
+              <Text fontSize="md">A maximum of 25 tokens can be minted at a time!</Text>
+              <Text fontSize="md">If nothing happens, make sure you have enough </Text>
+              <Text fontSize="md">BNB to purchase an NFT (0.25 BNB).</Text>
+            </Center>
+          </Box>
+          {loadingTx && (
+            <ReactLoading
+              type={"spin"}
+              color={"#C66CFF"}
+              height={"10%"}
+              width={"10%"}
+            />
+          )}
+        </Box>
+        <Box w={["350px", , , ,"450px"]} display={'flex'} justifyContent="center">
+          <Button
+            align="center"
+            color="#C66CFF"
+            border="1px solid #C66CFF"
+            backgroundColor="#0B3552"
+            w="100%"
+            h="30px"
+            onClick={() => window.open("https://www.youtube.com/watch?v=ljYJLPSWLuo")}
+          >
+            How to view your NFT
+          </Button>
         </Box>
       </Center>
     </>
