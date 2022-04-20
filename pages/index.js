@@ -248,8 +248,6 @@ export default function Home({ contract }) {
             >
               <Image
                 src="/monk.png"
-                width="450"
-                height="868"
                 layout="fill"
                 alt="Monk"
               />
@@ -342,8 +340,6 @@ export default function Home({ contract }) {
               <AspectRatio ratio={1200 / 1369} minW="750px" position="absolute">
                 <Image
                   src="/mercenary2.png"
-                  width="750"
-                  height="840"
                   layout="fill"
                   alt="Monk"
                 />
@@ -360,8 +356,6 @@ export default function Home({ contract }) {
               <AspectRatio ratio={800 / 1365} minW="500px" position="absolute">
                 <Image
                   src="/gladiator.png"
-                  width="500"
-                  height="1023"
                   layout="fill"
                   alt="Monk"
                 />

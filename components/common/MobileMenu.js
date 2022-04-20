@@ -24,7 +24,7 @@ import styles from './styles/nav.module.css';
 const NAV_STYLE = { listStyle: 'none', paddingLeft: 0 };
 const ICONS_SIZE = '32px';
 
-const MobileMenu = ({ setContract }) => {
+const MobileMenu = ({ contract, setContract }) => {
   const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -88,11 +88,18 @@ const MobileMenu = ({ setContract }) => {
                 <MobileNavButton targetElementId="lore" label="LORE" onClose={onClose} />
                 <MobileNavButton targetElementId="roadmap" label="ROADMAP" onClose={onClose} />
                 <MobileNavButton targetElementId="team" label="TEAM" onClose={onClose} />
-                <ListItem mb={3}>
-                  <a href="https://crn-wallet.netlify.app/" target="_blank">
-                    MY WALLET
-                  </a>
-                </ListItem>
+                {
+                  (contract) ?
+                    <ListItem mb={3}>
+                      <a href="/Wallet" target="_blank">
+                        MY WALLET
+                      </a>
+                    </ListItem>
+                  :
+                    <ListItem mb={3} className={styles.disabledMenuBtn} title={'Connect your wallet to see your warriors'}>
+                      MY WALLET
+                    </ListItem>
+                }
                 <MobileNavButton targetElementId="faq" label="FAQ" onClose={onClose} />
               </UnorderedList>
               <HStack gap={4} justifyContent="center" borderTop="1px dashed rgba(255, 255, 255, 0.2)" pt={5}>

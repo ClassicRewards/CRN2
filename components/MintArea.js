@@ -21,7 +21,7 @@ export function MintArea({ contract }) {
   const MAX_SUPPLY = 6000;
   const web3 = window.ethereum ? new Web3(window.ethereum) : null;
   if(!web3) {
-    toast.error("please, setup Metamask", {
+    toast.error("Please Use Metamask Browser!", {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: true,

@@ -6,7 +6,7 @@ import { scroller } from 'react-scroll';
 import { useScrollPosition } from '../../hooks';
 import MobileMenu from './MobileMenu';
 
-const Header = ({ setContract }) => {
+const Header = ({ contract, setContract }) => {
   const variant = useBreakpointValue({ base: 'hamburger', lg: 'menu' }) || 'menu';
 
   const scroll = useScrollPosition();
@@ -43,8 +43,8 @@ const Header = ({ setContract }) => {
       <Box w="60px" h="60px" position="relative" cursor="pointer" onClick={onGoBackHome}>
         <Image src="/crlogo.png" w="120px" h="120px" layout="fill" alt="Classic Rewards" />
       </Box>
-      {variant === 'menu' && <DesktopMenu setContract={setContract} />}
-      {variant === 'hamburger' && <MobileMenu setContract={setContract} />}
+      {variant === 'menu' && <DesktopMenu setContract={setContract} contract={contract} />}
+      {variant === 'hamburger' && <MobileMenu setContract={setContract} contract={contract} />}
     </Flex>
   );
 };

@@ -6,7 +6,7 @@ import styles from './styles/nav.module.css';
 import { ConnectButton } from '../ConnectButton';
 const NAV_STYLE = { listStyle: 'none', paddingLeft: 0 };
 
-const DesktopMenu = ({ setContract }) => {
+const DesktopMenu = ({ contract, setContract }) => {
   return (
     <Box as="nav" pt="2">
       <HStack as="ul" textStyle="navButton" spacing={8} style={NAV_STYLE} fontWeight="bold">
@@ -31,11 +31,18 @@ const DesktopMenu = ({ setContract }) => {
         <DesktopNavButton targetElementId="lore" label="LORE" />
         <DesktopNavButton targetElementId="roadmap" label="ROADMAP" />
         <DesktopNavButton targetElementId="team" label="TEAM" />
-        <li className={styles.menuBtn}>
-          <a href="https://crn-wallet.netlify.app/" target="_blank">
-            MY WALLET
-          </a>
-        </li>
+        {
+          (contract) ?
+            <li className={styles.menuBtn}>
+              <a href="/Wallet" target="_blank">
+                MY WALLET
+              </a>
+            </li>
+          :
+            <li className={styles.disabledMenuBtn} title={'Connect your wallet to see your warriors'}>
+              MY WALLET
+            </li>
+        }
         <DesktopNavButton targetElementId="faq" label="FAQ" />
       </HStack>
     </Box>

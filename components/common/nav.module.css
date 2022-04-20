@@ -37,3 +37,8 @@
 .menuBtn:hover {
 	color: #c66cff;
 }
+
+.disabledMenuBtn {
+	color: #8d8d88;
+	cursor: not-allowed;
+}
