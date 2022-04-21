@@ -65,7 +65,7 @@ export default function Home({ contract }) {
             BNBchain + Ethereum Classic P2E
           </Heading>
           <Heading size="2xl" fontSize={["48px", , , , "60px"]} color="#C66CFF">
-            MINT ON APRIL 2nd
+            MINTING IS ONGOING!
           </Heading>
           <Text
             textStyle="paragraph"
