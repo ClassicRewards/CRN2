@@ -1,18 +1,22 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
 import NFTs from "../ranking.json";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { walletOfOwner } from "../utils/interact";
 import styles from '../components/myWallet/wallet.module.css';
 
 function Index() {
   const [List, setList] = useState(NFTs);
   const [token, setToken] = useState([]);
+  const bgVideo = useRef();
+
+  const warriorLinkVedio = "https://classicrewards.mypinata.cloud/ipfs/QmbjmK3Ui26XWgtWPVCxkiTY9ybAyWkVdu32XC1PH463o1/%20";
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     const token = await walletOfOwner();
     setToken(token);
+    bgVideo.current?.play();
   }, []);
 
   function arrayObjectIndexOf(myArray, property, searchTerm) {
@@ -20,11 +24,15 @@ function Index() {
       if (myArray[i][property] === parseInt(searchTerm)) {
         return (
           <div className={styles.grey} data-sort="a" key={i}>
-            <a href={`NULL`} target="_blank">
-                <img className={styles.greys}
-                    src={`https://classicrewards.mypinata.cloud/ipfs/QmZHcKiTnGMPjdwEZ7dGGgtf1AZJwHYeHaYuXKxhonvckm/%20${searchTerm}.jpg`} alt=""
-                />
-            </a>
+              <video
+                playsInline
+                autoPlay
+                muted
+                loop
+                ref={bgVideo}
+              >
+                <source src={warriorLinkVedio + searchTerm + ".mp4"} type="video/mp4" />
+              </video>
             <p className={styles.grey_rank}>Token ID #{searchTerm}</p>
             <p className="swaggo_owner"></p>
           </div>
