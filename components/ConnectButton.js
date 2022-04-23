@@ -12,7 +12,7 @@ export function ConnectButton({ chain, networkName, chainId, setContract }) {
   const [network, setNetwork] = useState(null);
   const [address, setAddress] = useState(null);
   let mainC = null;
-  let web3Modal;
+  let web3Modal = null;
 
   let colorBasedOnChain = getcolorBasedOnChain(chainId);
   if (!colorBasedOnChain) {
@@ -53,25 +53,29 @@ export function ConnectButton({ chain, networkName, chainId, setContract }) {
     }
   }, []);
 
-  if (typeof window !== "undefined") {
-    const providerOptions = {
-      walletconnect: {
-        package: WalletConnectProvider,
-        options: {
-          rpc: {
-            4: "https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161", // rinkeby  testnet
-            56: "https://bsc-dataseed.binance.org/", // binance mainnet
-            97: "https://data-seed-prebsc-1-s1.binance.org:8545", // binance testnet
+  function setWeb3Modal () {
+    if (typeof window !== "undefined") {
+      const providerOptions = {
+        walletconnect: {
+          package: WalletConnectProvider,
+          options: {
+            rpc: {
+              4: "https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161", // rinkeby  testnet
+              56: "https://bsc-dataseed.binance.org/", // binance mainnet
+              61: "https://www.ethercluster.com/etc", // ethereum classic mainnet
+              97: "https://data-seed-prebsc-1-s1.binance.org:8545", // binance testnet
+            },
           },
         },
-      },
-    };
-    web3Modal = new Web3Modal({
-      network: "mainnet",
-      cacheProvider: true,
-      providerOptions,
-    });
-  }
+      };
+      web3Modal = new Web3Modal({
+        network: "mainnet",
+        cacheProvider: true,
+        providerOptions,
+      });
+    }
+  };
+  setWeb3Modal();
 
   return network?.chainId === chainId && address ? (
     <Button
@@ -102,6 +106,8 @@ export function ConnectButton({ chain, networkName, chainId, setContract }) {
 
   async function connectWallet() {
     try {
+      web3Modal = null
+      setWeb3Modal();
       const instance = await web3Modal.connect();
       await instance.enable();
 
@@ -166,7 +172,6 @@ export function ConnectButton({ chain, networkName, chainId, setContract }) {
 
   async function resetConnection() {
     console.log("disconnecting from provider", address, provider, network);
-    // debugger;
 
     await web3Modal.clearCachedProvider();
     if (provider?.disconnect && typeof provider.disconnect === "function") {

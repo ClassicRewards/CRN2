@@ -73,8 +73,10 @@ export default function Home({ contract }) {
             fontSize={["18px", , , , "20px"]}
             mt={4}
           >
-            The first 1,000 NFT’s to be minted will be airdropped Classic Rewards tokens after the launch of our token.
-            <br /> 6000 NFT’s are available for minting and you get a random NFT each time you mint.
+            For ETC, the first 1000 NFT's will be airdropped 100% of the proceeds from the last 1000 NFT's !
+            <br />
+            <br />
+             For BNB, the first 500 NFT's will be airdropped 15M Classic Rewards Tokens. The next 500 will be airdropped 6M Classic Rewards Tokens.
             
           </Text>
         </Box>
@@ -220,9 +222,7 @@ export default function Home({ contract }) {
           </Heading>
           <Box textStyle="paragraph" fontSize={["16px", "18px", , "20px"]}>
             <Text mt={4}>
-              60% of our 10,000 NFT’s will be available for early minting. These
-              will be at a flat rate of 0.25 BNB. The other 40% will be split between
-              game rewards, marketing/community events, and development costs.
+              We have five characters in the Stamford Skirmish game. Archer, Gladiator, Knight, Mercenary, and Monk.
             </Text>
             <Text mt={4}>
               Each character has unique metadata which comprises attack,
