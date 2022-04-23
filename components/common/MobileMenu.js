@@ -96,12 +96,12 @@ const MobileMenu = ({ contract, setContract }) => {
                   (contract) ?
                     <ListItem mb={3}>
                       <a href={`/Wallet?address=${contract.address}`}>
-                        MY WALLET
+                        MY NFTs
                       </a>
                     </ListItem>
                   :
                     <ListItem mb={3} className={styles.disabledMenuBtn} title={'Connect your wallet to see your warriors'}>
-                      MY WALLET
+                      MY NFTs
                     </ListItem>
                 }
                 <MobileNavButton targetElementId="faq" label="FAQ" onClose={onClose} />

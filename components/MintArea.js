@@ -174,6 +174,14 @@ export function MintArea({ contract }) {
                   textAlign={'center'}
                 />
               </Box>
+                {loadingTx && (
+                  <ReactLoading
+                    type={"spin"}
+                    color={colorBasedOnChain}
+                    height={"10%"}
+                    width={"10%"}
+                  />
+                )}
               <Box w={'50%'} display={'flex'} flexDirection={'column'} alignItems={'center'}>
                 <Text textStyle="paragraph" >Click to Mint</Text>
                 <Button
@@ -200,14 +208,6 @@ export function MintArea({ contract }) {
               <Text fontSize="md">{networkInitials} to purchase an NFT ({mintingPrice} {networkInitials}).</Text>
             </Center>
           </Box>
-          {loadingTx && (
-            <ReactLoading
-              type={"spin"}
-              color={colorBasedOnChain}
-              height={"10%"}
-              width={"10%"}
-            />
-          )}
         </Box>
         <Box w={["350px", , , ,"450px"]} display={'flex'} justifyContent="center">
           <Button

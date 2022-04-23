@@ -38,12 +38,12 @@ const DesktopMenu = ({ contract, setContract }) => {
           (contract) ?
             <li className={styles.menuBtn}>
               <a href={`/Wallet?address=${contract.address}`}>
-                MY WALLET
+                MY NFTs
               </a>
             </li>
           :
             <li className={styles.disabledMenuBtn} title={'Connect your wallet to see your warriors'}>
-              MY WALLET
+              MY NFTs
             </li>
         }
         <DesktopNavButton targetElementId="faq" label="FAQ" />
