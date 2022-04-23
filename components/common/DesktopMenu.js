@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, HStack } from '@chakra-ui/react';
+import { Box, HStack, Link } from '@chakra-ui/react';
 import Image from 'next/image';
 import DesktopNavButton from './DesktopNavButton';
 import styles from './styles/nav.module.css';
@@ -14,7 +14,10 @@ const DesktopMenu = ({ contract, setContract }) => {
           <Image src="/cross-chain.png" height="60px" width="116px" alt="Cross Chain" />
         </li>
         <li>
-          <ConnectButton setContract={setContract} />
+          <ConnectButton chain={"ETC"} networkName={"Ethereum Classic"} chainId={61} setContract={setContract} />
+        </li>
+        <li>
+          <ConnectButton chain={"BNB"} networkName={"Binance"} chainId={56} setContract={setContract} />
         </li>
         <li className={styles.menuBtn}>
           <a href="/Classic_Reward_Token_WhitePaper.pdf" target="_blank">
@@ -34,7 +37,7 @@ const DesktopMenu = ({ contract, setContract }) => {
         {
           (contract) ?
             <li className={styles.menuBtn}>
-              <a href="/Wallet" target="_blank">
+              <a href={`/Wallet?address=${contract.address}`}>
                 MY WALLET
               </a>
             </li>

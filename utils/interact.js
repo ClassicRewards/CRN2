@@ -2,13 +2,12 @@ import abi from "../abi.json";
 import Web3 from "web3";
 
 let web3 = {};
-const address = "0x0cC7f43A7FBBa594b57C9676ccc2ade02eb62D29";
 
 if (typeof window !== "undefined") {
   web3 = new Web3(window.ethereum);
 }
 
-export const totalSupply = async () => {
+export const totalSupply = async (address) => {
   const contract = new web3.eth.Contract(abi, address);
 
   try {
@@ -22,7 +21,7 @@ export const totalSupply = async () => {
   }
 };
 
-export const walletOfOwner = async () => {
+export const walletOfOwner = async (address) => {
   const contract = new web3.eth.Contract(abi, address);
   const accounts = await web3.eth.getAccounts();
 

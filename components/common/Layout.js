@@ -55,7 +55,7 @@ const Layout = ({ children }) => {
                   {element}
                 </Box>;
   } else {
-    container = <><Header contract={contract} setContract={setContract}/>{element}<Footer/></>;
+    container = <><Header contract={contract} setContract={setContract}/>{element}<Footer contract={contract}/></>;
   }
 
   return (

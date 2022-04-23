@@ -4,19 +4,20 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import { ethers } from "ethers";
 import { Button } from "@chakra-ui/react";
 import ClassicRewards from "../abi/classicRwards.json";
+import { getSmartContractAddressByChainId, getAllChains, getcolorBasedOnChain } from "../config/utils";
+import './myWallet/JQueryLoader';
 
-// import { contractAddress } from "../config/contractAddress";
-// import { contractABI } from "../config/abi";
-
-export function ConnectButton({ setContract }) {
+export function ConnectButton({ chain, networkName, chainId, setContract }) {
   const [provider, setProvider] = useState(null);
   const [network, setNetwork] = useState(null);
   const [address, setAddress] = useState(null);
   let mainC = null;
   let web3Modal;
-  const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID
-    ? Number(process.env.NEXT_PUBLIC_CHAIN_ID)
-    : 56;
+
+  let colorBasedOnChain = getcolorBasedOnChain(chainId);
+  if (!colorBasedOnChain) {
+    colorBasedOnChain = "#C66CFF";
+  } 
 
   useEffect(() => {
     listenToProviderEvents();
@@ -72,29 +73,30 @@ export function ConnectButton({ setContract }) {
     });
   }
 
-  return network?.chainId === CHAIN_ID && address ? (
+  return network?.chainId === chainId && address ? (
     <Button
       onClick={resetConnection}
       align="center"
-      color="#C66CFF"
-      border="1px solid #C66CFF"
+      color={colorBasedOnChain}
+      border={`1px solid ${colorBasedOnChain}`}
       backgroundColor="#0B3552"
       w="175px"
       h="50px"
     >
-      BNB DISCONNECT
+      {chain} DISCONNECT
     </Button>
   ) : (
     <Button
+      id={chain + "-connect-button"}
       onClick={connectWallet}
       align="center"
-      color="#C66CFF"
-      border="1px solid #C66CFF"
+      color={colorBasedOnChain}
+      border={`1px solid ${colorBasedOnChain}`}
       backgroundColor="#0B3552"
       w="150px"
       h="50px"
     >
-      BNB CONNECT
+      {chain} CONNECT
     </Button>
   );
 
@@ -108,15 +110,15 @@ export function ConnectButton({ setContract }) {
 
       const signer = _provider.getSigner();
 
-      const address = await signer.getAddress();
-      setAddress(address);
-      console.log(address);
+      const userAddress = await signer.getAddress();
+      setAddress(userAddress);
+      console.log(userAddress);
       const network = await _provider.getNetwork();
       setNetwork(network);
       console.log(network);
 
-      if (network.chainId !== CHAIN_ID) {
-        alert("Please, change to Binance network");
+      if (network.chainId !== chainId) {
+        alert(`Please, change to ${networkName} network`);
         return;
       }
 
@@ -124,12 +126,14 @@ export function ConnectButton({ setContract }) {
 
       async function getContracts() {
         const _contract = new ethers.Contract(
-          ClassicRewards.address,
+          getSmartContractAddressByChainId(chainId),
           ClassicRewards.abi,
           signer
         );
         setContract(_contract);
         mainC = _contract;
+
+        disableOtherConenctButtons(chain);
       }
       await setContracts(signer);
     } catch (error) {
@@ -142,6 +146,22 @@ export function ConnectButton({ setContract }) {
         console.error(error);
       }
     }
+  }
+
+  function disableOtherConenctButtons (connectedChain) {
+    getAllChains().forEach((chain) => {
+      if (chain != connectedChain) {
+        $(`#${chain}-connect-button`).prop('disabled', true);
+      }
+    })
+  }
+
+  function enableOtherConenctButtons (connectedChain) {
+    getAllChains().forEach((chain) => {
+      if (chain != connectedChain) {
+        $(`#${chain}-connect-button`).prop('disabled', false);
+      }
+    })
   }
 
   async function resetConnection() {
@@ -160,6 +180,8 @@ export function ConnectButton({ setContract }) {
     setContract(null);
     setNetwork({});
     await web3Modal.off();
+
+    enableOtherConenctButtons(chain);
 
     console.log("disconnected");
   }

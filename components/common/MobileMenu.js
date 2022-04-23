@@ -13,6 +13,7 @@ import {
   UnorderedList,
   ListItem,
   Center,
+  Flex
 } from '@chakra-ui/react';
 import { FaTwitter, FaTelegramPlane, FaYoutube } from 'react-icons/fa';
 import HamburgerButton from './HamburgerButton';
@@ -44,7 +45,10 @@ const MobileMenu = ({ contract, setContract }) => {
 
   return (
     <>
-      <ConnectButton setContract={setContract} />
+      <Flex flexDirection={'column'} height={'inherit'} justifyContent={'space-evenly'}>
+        <ConnectButton chain={"ETC"} networkName={"Ethereum Classic"} chainId={61} setContract={setContract} />
+        <ConnectButton chain={"BNB"} networkName={"Binance"} chainId={56} setContract={setContract} />
+      </Flex>
       <Box as="nav" pt="6">
         <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
           <DrawerOverlay />
@@ -91,7 +95,7 @@ const MobileMenu = ({ contract, setContract }) => {
                 {
                   (contract) ?
                     <ListItem mb={3}>
-                      <a href="/Wallet" target="_blank">
+                      <a href={`/Wallet?address=${contract.address}`}>
                         MY WALLET
                       </a>
                     </ListItem>

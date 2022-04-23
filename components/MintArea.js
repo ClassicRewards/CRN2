@@ -8,6 +8,7 @@ import ReactLoading from "react-loading";
 import "react-toastify/dist/ReactToastify.css";
 import ClassicRewards from "../abi/classicRwards.json"
 import Web3 from "web3";
+import { getNetworkInitialsByChainId, getMintingPriceByChainId, getMaxMintingSupplyByChainId, getcolorBasedOnChain } from "../config/utils"
 
 export function MintArea({ contract }) {
   const [amount, setAmount] = useState(1);
@@ -18,8 +19,7 @@ export function MintArea({ contract }) {
   const [loadingTx, setLoadingTx] = useState(false);
   // console.log("State: ", isPaused, presaleEnd);
 
-  const MAX_SUPPLY = 6000;
-  const web3 = window.ethereum ? new Web3(window.ethereum) : null;
+  const web3 = typeof window !== "undefined" ? window.ethereum ? new Web3(window.ethereum) : null : null;
   if(!web3) {
     toast.error("Please Use Metamask Browser!", {
       position: "top-center",
@@ -32,7 +32,30 @@ export function MintArea({ contract }) {
     });
   }
 
-  const mainCont = web3 ? new web3.eth.Contract(ClassicRewards.abi, ClassicRewards.address) : {};
+  const chainId = contract ? contract.provider._network.chainId : null;
+  const smartContractAddress = contract ? contract.address : null;
+  const mainCont = web3 ? new web3.eth.Contract(ClassicRewards.abi, smartContractAddress) : {};
+
+  let networkInitials = getNetworkInitialsByChainId(chainId);
+  let mintingPrice = getMintingPriceByChainId(chainId);
+  let maxMintingSupply = getMaxMintingSupplyByChainId(chainId);
+  let colorBasedOnChain = getcolorBasedOnChain(chainId);
+  
+  if (!networkInitials) {
+    networkInitials = "BNB";
+  }  
+  
+  if (!mintingPrice) {
+    mintingPrice = "0.25";
+  }  
+
+  if (!maxMintingSupply) {
+    maxMintingSupply = 6000;
+  }
+
+  if (!colorBasedOnChain) {
+    colorBasedOnChain = "#C66CFF";
+  }  
 
   useEffect(() => {
     (async () => {
@@ -100,8 +123,8 @@ export function MintArea({ contract }) {
         <Box w={["350px", , , ,"450px"]} display={'flex'} justifyContent="center">
           <Button
             align="center"
-            color="#C66CFF"
-            border="1px solid #C66CFF"
+            color={colorBasedOnChain}
+            border={`1px solid ${colorBasedOnChain}`}
             backgroundColor="#0B3552"
             w="100%"
             h="30px"
@@ -126,10 +149,10 @@ export function MintArea({ contract }) {
                 <Text textStyle="paragraph" fontWeight={'bold'} fontSize={'40px'}>Warrior Minting</Text>
                 <Flex justifyContent={'center'}>
                   <Text textStyle="paragraph" fontWeight={'bold'} fontSize={'24px'} m={'0px 5px'}>Price:</Text>
-                  <Text textStyle="paragraph" fontWeight={'bold'} fontSize={'24px'} m={'0px 5px'} color={'#C66CFF'}>0.25 BNB</Text>
+                  <Text textStyle="paragraph" fontWeight={'bold'} fontSize={'24px'} m={'0px 5px'} color={colorBasedOnChain}>{mintingPrice} {networkInitials}</Text>
                 </Flex>
                 <Flex justifyContent={'center'}>
-                  <Text textStyle="paragraph" fontWeight={'bold'} fontSize={'40px'} color={'#C66CFF'}>{contract ? totalSupply : "--"} / {MAX_SUPPLY}</Text>
+                  <Text textStyle="paragraph" fontWeight={'bold'} fontSize={'40px'} color={colorBasedOnChain}>{contract ? totalSupply : "--"} / {maxMintingSupply}</Text>
                 </Flex>
               </Box>
             </Center>
@@ -142,7 +165,7 @@ export function MintArea({ contract }) {
                 <Input
                   value={amount}
                   onChange={handleInput}
-                  focusBorderColor="#C66CFF"
+                  focusBorderColor={colorBasedOnChain}
                   placeholder="1"
                   type="number"
                   w="140px"
@@ -155,14 +178,14 @@ export function MintArea({ contract }) {
                 <Text textStyle="paragraph" >Click to Mint</Text>
                 <Button
                   align="center"
-                  color="#C66CFF"
-                  border="1px solid #C66CFF"
+                  color={colorBasedOnChain}
+                  border={`1px solid ${colorBasedOnChain}`}
                   backgroundColor="#0B3552"
                   w="140px"
                   h="45px"
                   onClick={() => onMint(amount)}
                   borderRadius={'16px'}
-                  disabled={ isPaused || contract == null || totalSupply === MAX_SUPPLY || amount > 25 }
+                  disabled={ isPaused || contract == null || totalSupply === maxMintingSupply || amount > 25 }
                 >
                   {mintMore ? "MINT MORE" : "MINT"}
                 </Button>
@@ -174,13 +197,13 @@ export function MintArea({ contract }) {
             <Center flexDirection={'column'} m={'10px 0px'}>
               <Text fontSize="md">A maximum of 25 tokens can be minted at a time!</Text>
               <Text fontSize="md">If nothing happens, make sure you have enough </Text>
-              <Text fontSize="md">BNB to purchase an NFT (0.25 BNB).</Text>
+              <Text fontSize="md">{networkInitials} to purchase an NFT ({mintingPrice} {networkInitials}).</Text>
             </Center>
           </Box>
           {loadingTx && (
             <ReactLoading
               type={"spin"}
-              color={"#C66CFF"}
+              color={colorBasedOnChain}
               height={"10%"}
               width={"10%"}
             />
@@ -189,8 +212,8 @@ export function MintArea({ contract }) {
         <Box w={["350px", , , ,"450px"]} display={'flex'} justifyContent="center">
           <Button
             align="center"
-            color="#C66CFF"
-            border="1px solid #C66CFF"
+            color={colorBasedOnChain}
+            border={`1px solid ${colorBasedOnChain}`}
             backgroundColor="#0B3552"
             w="100%"
             h="30px"
@@ -204,7 +227,7 @@ export function MintArea({ contract }) {
   );
 
   async function onMint(amount) {
-    if (Number(amount) <= 0 || Number(amount) + totalSupply > MAX_SUPPLY) {
+    if (Number(amount) <= 0 || Number(amount) + totalSupply > maxMintingSupply) {
       toast.error("Not valid Amount", {
         position: "top-center",
         autoClose: 5000,
