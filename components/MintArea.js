@@ -102,7 +102,7 @@ export function MintArea({ contract }) {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer theme={"dark"} />
       <Center
         h="100%"
         style={{
@@ -262,15 +262,12 @@ export function MintArea({ contract }) {
     } catch (error) {
       setLoadingTx(false);
       let errorMsg = error.hasOwnProperty("error") ? error.error : error;
-      errorMsg = errorMsg.hasOwnProperty("data")
-        ? errorMsg.data.hasOwnProperty("originalError")
-          ? errorMsg.message
-          : error.data.message
+      
+      errorMsg = errorMsg.hasOwnProperty("data") ? 
+          errorMsg.data.hasOwnProperty("originalError") ? errorMsg.message : error.data.message
         : errorMsg.message;
-      if (
-        errorMsg.indexOf("err: insufficient funds for gas * price + value:") !==
-        -1
-      ) {
+      
+      if (errorMsg.indexOf("insufficient funds") !== -1) {
         errorMsg = "Insufficient Funds";
         toast.error(errorMsg, {
           position: "top-center",
@@ -281,8 +278,7 @@ export function MintArea({ contract }) {
           draggable: true,
           progress: undefined,
         });
-      }        
-      else {
+      } else {
         errorMsg = "";
         console.log(errorMsg);
       }
