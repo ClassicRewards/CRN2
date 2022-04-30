@@ -86,8 +86,8 @@ export default function Home({ contract }) {
           right={["50%", , , "10%"]}
           transform={["translateX(50%)", , , "initial"]}
           bottom="3%"
-          w="250px"
-          h="180px"
+          w={["150px", , , ,"250px"]}
+          h={["100px", , , ,"180px"]}
           zIndex={30}
         >
           <Image src="/cr-banner.png" alt="Classic Rewards" layout="fill" />
@@ -658,6 +658,8 @@ export default function Home({ contract }) {
               name="YATIN"
               lastname="SHARMA"
               description="Front End Developer"
+              icon={FaTwitter}
+              link="https://twitter.com/yatinsharma107"
             />
             <TeamMember
               imgSrc="/crypto-prophet.svg"

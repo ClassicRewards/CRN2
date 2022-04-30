@@ -8,7 +8,16 @@ import ReactLoading from "react-loading";
 import "react-toastify/dist/ReactToastify.css";
 import ClassicRewards from "../abi/classicRwards.json"
 import Web3 from "web3";
-import { getNetworkInitialsByChainId, getMintingPriceByChainId, getMaxMintingSupplyByChainId, getcolorBasedOnChain } from "../config/utils"
+import {
+  getNetworkInitialsByChainId,
+  getMintingPriceByChainId,
+  getMaxMintingSupplyByChainId,
+  getcolorBasedOnChain, 
+  getSmartContractAddressByChainId, 
+  getAllChainIds, 
+  getNetworkNameByChainId 
+} from "../config/utils";
+import { CopyIcon, CheckIcon } from '@chakra-ui/icons'
 
 export function MintArea({ contract }) {
   const [amount, setAmount] = useState(1);
@@ -40,7 +49,7 @@ export function MintArea({ contract }) {
   let mintingPrice = getMintingPriceByChainId(chainId);
   let maxMintingSupply = getMaxMintingSupplyByChainId(chainId);
   let colorBasedOnChain = getcolorBasedOnChain(chainId);
-  
+
   if (!networkInitials) {
     networkInitials = "BNB";
   }  
@@ -56,6 +65,13 @@ export function MintArea({ contract }) {
   if (!colorBasedOnChain) {
     colorBasedOnChain = "#C66CFF";
   }  
+
+  const smartContractArray = [];
+  getAllChainIds().forEach(element => {
+    smartContractArray.push({[element]: true});
+  });
+
+  const [showCopyIcon, setShowCopyIcon] = useState(smartContractArray);
 
   useEffect(() => {
     (async () => {
@@ -140,7 +156,7 @@ export function MintArea({ contract }) {
             boxShadow:
               "0 20px 20px rgba(66, 32, 111, 0.2), 0px 0px 50px rgba(66, 32, 111, 0.3)",
             borderRadius: "0.8rem",
-            height: "430px",
+            height: ["450px", , , , "430px"],
           }}
         >
           <Box>
@@ -221,6 +237,34 @@ export function MintArea({ contract }) {
           >
             How to view your NFT
           </Button>
+        </Box>
+        <Box h={"auto"} mt={["30px", , , ,"100px"]}>
+          {
+            showCopyIcon.map((ele, index)=> {
+              const id = Object.keys(ele)[0];
+              const address = getSmartContractAddressByChainId(id);
+              const showCopyIconFlag = ele[id];
+              return (
+                <Flex key={index}>
+                    <Box display={["block", , , "Flex"]}>
+                      <Flex>
+                        <Text fontSize={["18px", , , , "20px"]} color={getcolorBasedOnChain(id)}>{getNetworkNameByChainId(id)}</Text>
+                        <Text fontSize={["18px", , , , "20px"]} ml={"5px"} color={"#75A7D3"}>NFT Contract:</Text>
+                      </Flex>
+                      <Text fontSize={["14px", , , , "16px"]} color={"lightgray"} ml={["0px", , , "5px"]} alignSelf={"center"}>{address}</Text>
+                    </Box>
+                  <Box onClick={() => {copyAddress(index, id, address)}} _hover={{ cursor: "pointer" }} alignSelf={["end", , , ,"center"]} title={(showCopyIconFlag ? "Copy address to clipboard" : "Copied")} ml={"5px"}>
+                    {
+                      showCopyIconFlag ?
+                        <CopyIcon/>
+                      :
+                        <CheckIcon/>
+                    }
+                  </Box>
+                </Flex>
+              )
+            })
+          }
         </Box>
       </Center>
     </>
@@ -320,13 +364,17 @@ export function MintArea({ contract }) {
     setAmount(value);
   }
 
-  // function handleWhitelistFile(data, fileInfo) {
-  //   const content = JSON.stringify(data);
-  //   console.log(data);
-  //   console.log(fileInfo);
-  // }
-}
+  function copyAddress(index, chainId, address) {
+    navigator.clipboard.writeText(address);
+    toggleCopyIcon(index, chainId, false);
+    setTimeout(() => {
+      toggleCopyIcon(index, chainId, true);
+    }, 1000);
+  }
 
-function getRandomNumber() {
-  return Math.floor(Math.random() * 1000000);
+  function toggleCopyIcon(index, chainId, newValue) {
+    const newState = [...showCopyIcon];
+    newState[index] = {[chainId]: newValue};
+    setShowCopyIcon(newState);
+  }
 }

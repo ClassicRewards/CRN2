@@ -1,7 +1,7 @@
 import React from "react";
 import styles from './wallet.module.css';
-import { Box, Button, Flex, useBreakpointValue } from "@chakra-ui/react";
-import { ArrowBackIcon } from '@chakra-ui/icons'
+import { Box, Button, Flex, useBreakpointValue, Icon } from "@chakra-ui/react";
+import { RiArrowGoBackFill } from "react-icons/ri";
 
 function Nav() {
   const navHeader = [styles.section_title, styles.nav_center].join(" ");
@@ -25,14 +25,14 @@ function Nav() {
                 Back
               </Button>
             </Flex>
-            <Flex w={"100%"} justifyContent={"center"} paddingRight={[,,,,"120px"]}>
+            <Flex w={"100%"} justifyContent={"center"} paddingRight={["90px",,,,"120px"]}>
               <span className={navHeader}>My Warriors</span>
             </Flex>
           </Flex>
         :
           <Box>
             <Box onClick={() => {window.location.href = "/"}} w={"auto"}>
-              <ArrowBackIcon w={"50%"}/>
+              <Icon as={RiArrowGoBackFill} w="20px" h="20px" pt="1px" />
             </Box>
             <Box w={"100%"} justifyContent={"center"}>
               <span className={navHeader}>My Warriors</span>
