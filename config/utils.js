@@ -80,3 +80,12 @@ export const getcolorBasedOnChain = (chainId) => {
 
     return mintBoxColor[chainId];
 }
+
+export const getcolorBasedOnAddress = (address) => {
+    const mintBoxColor = {
+        "0x0cC7f43A7FBBa594b57C9676ccc2ade02eb62D29": "#F1B80F",
+        "0x208a67F5e2e0f58FC9b118618eE2c2324F2E2b4e": "#6FBD44"
+    };
+
+    return mintBoxColor[address];
+}

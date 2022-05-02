@@ -83,11 +83,11 @@ export default function Home({ contract }) {
 
         <Box
           position="absolute"
-          right={["50%", , , "10%"]}
+          right={["30%", , , "10%"]}
           transform={["translateX(50%)", , , "initial"]}
           bottom="3%"
-          w={["150px", , , ,"250px"]}
-          h={["100px", , , ,"180px"]}
+          w={["140px", , , ,"250px"]}
+          h={["80px", , , ,"180px"]}
           zIndex={30}
         >
           <Image src="/cr-banner.png" alt="Classic Rewards" layout="fill" />

@@ -149,6 +149,19 @@ export function MintArea({ contract }) {
             How to mint on mobile
           </Button>
         </Box>
+        <Box w={["350px", , , ,"450px"]} display={'flex'} justifyContent="center">
+          <Button
+            align="center"
+            color={colorBasedOnChain}
+            border={`1px solid ${colorBasedOnChain}`}
+            backgroundColor="#0B3552"
+            w="100%"
+            h="30px"
+            onClick={() => window.open("https://youtu.be/S2Ed7pAII0M")}
+            >
+              How to mint classic rewards ETC  NFT
+          </Button>
+        </Box>
         <Box
           bg="linear-gradient(180deg, #362073, #190d35)"
           w={["350px", , , ,"450px"]}

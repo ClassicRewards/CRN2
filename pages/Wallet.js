@@ -6,7 +6,8 @@ import { walletOfOwner } from "../utils/interact";
 import styles from '../components/myWallet/wallet.module.css';
 import '../components/myWallet/JQueryLoader';
 import { useRouter } from 'next/router';
-import { getWarriorLinksByAddress } from "../config/utils";
+import { getWarriorLinksByAddress, getcolorBasedOnAddress } from "../config/utils";
+import { Text, Flex } from "@chakra-ui/react";
 
 function Index() {
   const [List, setList] = useState(NFTs);
@@ -16,6 +17,12 @@ function Index() {
 
   const warriorLinks = getWarriorLinksByAddress(router.query.address);
   const warriorVedioLink = warriorLinks ? warriorLinks.mp4 : "";
+
+  let colorBasedOnAddress = getcolorBasedOnAddress(router.query.address);
+
+  if (!colorBasedOnAddress) {
+    colorBasedOnAddress = "#C66CFF";
+  }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
@@ -29,17 +36,20 @@ function Index() {
       if (myArray[i][property] === parseInt(searchTerm)) {
         return (
           <div className={styles.grey} data-sort="a" key={i}>
-              <video
-                playsInline
-                autoPlay
-                muted
-                loop
-                ref={bgVideo}
-              >
-                <source src={warriorVedioLink + searchTerm + ".mp4"} type="video/mp4" />
-              </video>
-            <p className={styles.grey_rank}>Token ID #{searchTerm}</p>
-            <p className="swaggo_owner"></p>
+            <video
+              playsInline
+              autoPlay
+              muted
+              loop
+              ref={bgVideo}
+              style={{ border: "3px solid #461B7B", borderRadius: "20px", filter: "drop-shadow(0px 8px 8px rgba(0, 0, 0, 0.75))" }}
+            >
+              <source src={warriorVedioLink + searchTerm + ".mp4"} type="video/mp4" />
+            </video>
+            <Flex justifyContent={"center"}>
+              <Text className={styles.grey_rank}>Token ID</Text>
+              <Text className={styles.grey_rank} ml={"5px"} color={colorBasedOnAddress}>#{searchTerm}</Text>
+            </Flex>
           </div>
         );
       }
