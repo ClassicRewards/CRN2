@@ -674,7 +674,7 @@ export default function Home({ contract }) {
               description="Marketing"
             />
             <TeamMember
-              imgSrc="/Soteria.jpg"
+              imgSrc="/Soteria.png"
               name="Soteria"
               lastname="SC"
               description="Everything development related"
