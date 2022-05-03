@@ -676,7 +676,7 @@ export default function Home({ contract }) {
             <TeamMember
               imgSrc="https://pbs.twimg.com/profile_images/1507499965601521675/JZmddVNC_400x400.jpg"
               name="Soteria"
-              lastname="Smart Contracts"
+              lastname="SC"
               description="Everything development related"
             />
           </Flex>
