@@ -674,7 +674,7 @@ export default function Home({ contract }) {
               description="Marketing"
             />
             <TeamMember
-              imgSrc="https://pbs.twimg.com/profile_images/1507499965601521675/JZmddVNC_400x400.jpg"
+              imgSrc="/soteria.jpg"
               name="Soteria"
               lastname="SC"
               description="Everything development related"
