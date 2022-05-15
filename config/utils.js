@@ -1,3 +1,6 @@
+import EthereumClassicABI from "../abi/ethereumClassicABI.json"
+import BinanceABI from "../abi/binanceABI.json"
+
 export const getSmartContractAddressByChainId = (chainId) => {
     const address = {
         56: "0x0cC7f43A7FBBa594b57C9676ccc2ade02eb62D29",
@@ -88,4 +91,22 @@ export const getcolorBasedOnAddress = (address) => {
     };
 
     return mintBoxColor[address];
+}
+
+export const getABIBasedOnChain = (chainId) => {
+    const chainABIs = {
+        56: BinanceABI,
+        61: EthereumClassicABI
+    };
+
+    return chainABIs[chainId];
+}
+
+export const getRpcBasedOnChain = (chainId) => {
+    const rpc = {
+        56: "https://bsc-dataseed.binance.org/",
+        61: "https://www.ethercluster.com/etc",
+    }
+
+    return rpc[chainId];
 }

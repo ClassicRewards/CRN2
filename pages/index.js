@@ -25,7 +25,18 @@ import BGSection2 from "../public/section2-bg.jpg";
 import BGSection3 from "../public/section3-bg.jpg";
 import styles from "./styles/home.module.css";
 import { MintArea } from "../components/MintArea";
-// import { connectHandler } from '../utils/connectHandler';
+
+import Web3 from "web3";
+
+import {
+  getAllChainIds,
+  getcolorBasedOnChain,
+  getNetworkNameByChainId,
+  getSmartContractAddressByChainId,
+  getMaxMintingSupplyByChainId,
+  getABIBasedOnChain,
+  getRpcBasedOnChain
+} from '../config/utils';
 
 export default function Home({ contract }) {
   const isMounted = useIsMounted();
@@ -33,8 +44,37 @@ export default function Home({ contract }) {
   const iconsVisible = useBreakpointValue({ base: false, md: true });
   const bgVideo = useRef();
 
+  const allChainIds = getAllChainIds();
+  const mintCountArray = [];
+  allChainIds.forEach((ele) => {
+    mintCountArray.push({[ele]: 0});
+  });
+  const [mintCount, setMintCount] = useState(mintCountArray);
+
+  async function updateMintCount () {
+    try {
+      let _total = 0;
+      const newMintCountState = [...mintCount];
+      allChainIds.forEach(async(ele, index) => {
+        const web3 = typeof window !== "undefined" ? new Web3(new Web3.providers.HttpProvider(getRpcBasedOnChain(ele))) : null;
+        const contractObj = web3 ? new web3.eth.Contract(getABIBasedOnChain(ele), getSmartContractAddressByChainId(ele)) : {};
+        
+        if (contractObj != {}) {
+          _total = Number(await contractObj.methods.totalSupply().call());
+        }
+        newMintCountState[index] = {[ele]: _total};
+      });
+      setTimeout(() => {
+        setMintCount(newMintCountState);
+      }, 2000);
+    } catch (e) {
+      console.log("Error: ", e);
+    }
+  }
+
   useEffect(() => {
     bgVideo.current?.play();
+    updateMintCount()
   }, []);
 
   if (!isMounted()) return null;
@@ -79,9 +119,27 @@ export default function Home({ contract }) {
              For BNB, the first 500 NFT's will be airdropped 15M Classic Rewards Tokens. The next 500 will be airdropped 6M Classic Rewards Tokens.
             
           </Text>
+          <Box mt={[3,,,,10]}>
+            {
+              allChainIds.map((ele, index) => {
+                return (
+                  <Flex key={index}>
+                      <Box display={"Flex"}>
+                        <Flex>
+                          <Text fontSize={["18px", , , , "20px"]} color={getcolorBasedOnChain(ele)}>{getNetworkNameByChainId(ele)}</Text>
+                          <Text fontSize={["18px", , , , "20px"]} ml={"5px"} color={"#75A7D3"}>NFT Minted:</Text>
+                        </Flex>
+                        <Text fontSize={["18px", , , , "20px"]} ml={"5px"} alignSelf={"center"}>{mintCount[index][ele]} / {getMaxMintingSupplyByChainId(ele)}</Text>
+                      </Box>
+                  </Flex>
+                )
+              })
+            }
+          </Box>
         </Box>
 
         <Box
+          display={["none",,,,"block"]}
           position="absolute"
           right={["30%", , , "10%"]}
           transform={["translateX(50%)", , , "initial"]}
@@ -102,7 +160,7 @@ export default function Home({ contract }) {
         className={styles.imageBg}
         backgroundImage={BGSection3.src}
       >
-        <MintArea contract={contract} />
+        <MintArea contract={contract} updateMintCount={updateMintCount}/>
       </Box>
 
       <Box
@@ -674,10 +732,16 @@ export default function Home({ contract }) {
               description="Marketing"
             />
             <TeamMember
+              imgSrc="/dev-squad.svg"
+              name="DEV"
+              lastname="SQUAD"
+              description="Game Development Team"
+            />
+            <TeamMember
               imgSrc="/Soteria.png"
               name="Soteria"
               lastname="SC"
-              description="Everything development related"
+              description="Smart Contract Development Team"
             />
           </Flex>
         </Center>

@@ -19,14 +19,13 @@ import {
 } from "../config/utils";
 import { CopyIcon, CheckIcon } from '@chakra-ui/icons'
 
-export function MintArea({ contract }) {
+export function MintArea({ contract, updateMintCount }) {
   const [amount, setAmount] = useState(1);
   const [mintMore, setMintMore] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   // const [presaleEnd, setPresaleEnd] = useState(0);
   const [totalSupply, setTotalSupply] = useState(0);
   const [loadingTx, setLoadingTx] = useState(false);
-  // console.log("State: ", isPaused, presaleEnd);
 
   const web3 = typeof window !== "undefined" ? window.ethereum ? new Web3(window.ethereum) : null : null;
   if(!web3) {
@@ -42,7 +41,7 @@ export function MintArea({ contract }) {
   }
 
   const chainId = contract ? contract.provider._network.chainId : null;
-  const smartContractAddress = contract ? contract.address : null;
+  const smartContractAddress = contract ? contract.address : getSmartContractAddressByChainId(56);
   const mainCont = web3 ? new web3.eth.Contract(ClassicRewards.abi, smartContractAddress) : {};
 
   let networkInitials = getNetworkInitialsByChainId(chainId);
@@ -75,7 +74,6 @@ export function MintArea({ contract }) {
 
   useEffect(() => {
     (async () => {
-      // console.log("CONTRACT: ", contract);
       if (contract) {
         try {
           let _isPaused = false;
@@ -88,30 +86,17 @@ export function MintArea({ contract }) {
           // alert("TODO message");
           console.log("Error: ", e);
         }
-
-        try {
-          // const _presale = await contract.presaleEnd();
-          // console.log(Number(_presale) * 1000);
-          // console.log(new Date().getTime());
-          // setPresaleEnd(Number(_presale) * 1000);
-        } catch (e) {
-          // alert("TODO message");
-          console.log("Error: ", e);
+      }
+      try {
+        let _total = 0;
+        if(mainCont != {}) {
+          _total = Number(await mainCont.methods.totalSupply().call());
+        } else {
+          _total = 1050;
         }
-
-        try {
-          let _total = 0;
-          if(mainCont != {}) {
-            _total = Number(await mainCont.methods.totalSupply().call());
-          } else {
-            _total = 1050;
-          }
-          console.log(_total);
-          setTotalSupply(_total);
-        } catch (e) {
-          // alert("TODO message");
-          console.log("Error: ", e);
-        }
+        setTotalSupply(_total);
+      } catch (e) {
+        console.log("Error: ", e);
       }
     })();
   }, [contract, loadingTx]);
@@ -181,7 +166,7 @@ export function MintArea({ contract }) {
                   <Text textStyle="paragraph" fontWeight={'bold'} fontSize={'24px'} m={'0px 5px'} color={colorBasedOnChain}>{mintingPrice} {networkInitials}</Text>
                 </Flex>
                 <Flex justifyContent={'center'}>
-                  <Text textStyle="paragraph" fontWeight={'bold'} fontSize={'40px'} color={colorBasedOnChain}>{contract ? totalSupply : "--"} / {maxMintingSupply}</Text>
+                  <Text textStyle="paragraph" fontWeight={'bold'} fontSize={'40px'} color={colorBasedOnChain}>{totalSupply} / {maxMintingSupply}</Text>
                 </Flex>
               </Box>
             </Center>
@@ -251,7 +236,7 @@ export function MintArea({ contract }) {
             How to view your NFT
           </Button>
         </Box>
-        <Box h={"auto"} mt={["30px", , , ,"100px"]}>
+        <Box h={"auto"} mt={["15px", , , ,"100px"]}>
           {
             showCopyIcon.map((ele, index)=> {
               const id = Object.keys(ele)[0];
@@ -316,6 +301,7 @@ export function MintArea({ contract }) {
         console.log("transaction failed!");
       }
       setTotalSupply(mintedAmount);
+      updateMintCount()
     } catch (error) {
       setLoadingTx(false);
       let errorMsg = error.hasOwnProperty("error") ? error.error : error;
