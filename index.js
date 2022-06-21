@@ -221,7 +221,7 @@ export default function Home({ contract }) {
           <Box textStyle="paragraph" fontSize={["16px", "18px", , "20px"]}>
             <Text mt={4}>
               60% of our 10,000 NFT’s will be available for early minting. These
-              will be at a flat rate of 0.25 BNB. The other 40% will be split between
+              will be at a flat rate of 0.2 BNB. The other 40% will be split between
               game rewards, marketing/community events, and development costs.
             </Text>
             <Text mt={4}>
