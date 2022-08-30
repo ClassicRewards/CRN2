@@ -42,7 +42,8 @@ export function MintArea({ contract, updateMintCount }) {
 
   const chainId = contract ? contract.provider._network.chainId : null;
   const smartContractAddress = contract ? contract.address : getSmartContractAddressByChainId(56);
-  const mainCont = web3 ? new web3.eth.Contract(getABIBasedOnChain(chainId), smartContractAddress) : {};
+  const smartContractABI = chainId !== null ? getABIBasedOnChain(chainId) : getABIBasedOnChain(56);
+  const mainCont = web3 ? new web3.eth.Contract(smartContractABI, smartContractAddress) : {};
 
   let networkInitials = getNetworkInitialsByChainId(chainId);
   let mintingPrice = getMintingPriceByChainId(chainId);
