@@ -3,8 +3,7 @@ import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { ethers } from "ethers";
 import { Button } from "@chakra-ui/react";
-import ClassicRewards from "../abi/classicRwards.json";
-import { getSmartContractAddressByChainId, getAllChains, getcolorBasedOnChain } from "../config/utils";
+import { getSmartContractAddressByChainId, getAllChains, getcolorBasedOnChain, getABIBasedOnChain } from "../config/utils";
 import './myWallet/JQueryLoader';
 
 export function ConnectButton({ chain, networkName, chainId, setContract }) {
@@ -133,7 +132,7 @@ export function ConnectButton({ chain, networkName, chainId, setContract }) {
       async function getContracts() {
         const _contract = new ethers.Contract(
           getSmartContractAddressByChainId(chainId),
-          ClassicRewards.abi,
+          getABIBasedOnChain(chainId),
           signer
         );
         setContract(_contract);
@@ -194,8 +193,8 @@ export function ConnectButton({ chain, networkName, chainId, setContract }) {
   async function setContracts(signer) {
     if(mainC && Number(await mainC.totalSupply()) >= 1050) {
       const _contract = new ethers.Contract(
-        ClassicRewards.subAddress,
-        ClassicRewards.abi,
+        getSmartContractAddressByChainId(chainId),
+        getABIBasedOnChain(chainId),
         signer
       );
       setContract(_contract);

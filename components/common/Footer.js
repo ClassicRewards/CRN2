@@ -13,7 +13,7 @@ const Footer = ({contract}) => {
 	let networkName = getNetworkNameByChainId(chainId);
 
 	if (!smartContractAddress) {
-		smartContractAddress = "0x0cC7f43A7FBBa594b57C9676ccc2ade02eb62D29";
+		smartContractAddress = "0xd5B60DeaE08d2d6D4B69eB9bc8B3B3172fFFa5CA";
 	}
 
 	if (!networkName) {

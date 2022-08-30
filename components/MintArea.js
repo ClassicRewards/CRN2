@@ -6,7 +6,6 @@ import { Center, Input, Button, Box, Text, Divider, Flex } from "@chakra-ui/reac
 import { ToastContainer, toast } from "react-toastify";
 import ReactLoading from "react-loading";
 import "react-toastify/dist/ReactToastify.css";
-import ClassicRewards from "../abi/classicRwards.json"
 import Web3 from "web3";
 import {
   getNetworkInitialsByChainId,
@@ -15,7 +14,8 @@ import {
   getcolorBasedOnChain, 
   getSmartContractAddressByChainId, 
   getAllChainIds, 
-  getNetworkNameByChainId 
+  getNetworkNameByChainId,
+  getABIBasedOnChain 
 } from "../config/utils";
 import { CopyIcon, CheckIcon } from '@chakra-ui/icons'
 
@@ -42,7 +42,7 @@ export function MintArea({ contract, updateMintCount }) {
 
   const chainId = contract ? contract.provider._network.chainId : null;
   const smartContractAddress = contract ? contract.address : getSmartContractAddressByChainId(56);
-  const mainCont = web3 ? new web3.eth.Contract(ClassicRewards.abi, smartContractAddress) : {};
+  const mainCont = web3 ? new web3.eth.Contract(getABIBasedOnChain(chainId), smartContractAddress) : {};
 
   let networkInitials = getNetworkInitialsByChainId(chainId);
   let mintingPrice = getMintingPriceByChainId(chainId);

@@ -3,7 +3,7 @@ import BinanceABI from "../abi/binanceABI.json"
 
 export const getSmartContractAddressByChainId = (chainId) => {
     const address = {
-        56: "0x0cC7f43A7FBBa594b57C9676ccc2ade02eb62D29",
+        56: "0xd5B60DeaE08d2d6D4B69eB9bc8B3B3172fFFa5CA",
         61: "0x208a67F5e2e0f58FC9b118618eE2c2324F2E2b4e"
     };
 
@@ -12,7 +12,7 @@ export const getSmartContractAddressByChainId = (chainId) => {
 
 export const getWarriorLinksByAddress = (address) => {
     const links = {
-        "0x0cC7f43A7FBBa594b57C9676ccc2ade02eb62D29": {
+        "0xd5B60DeaE08d2d6D4B69eB9bc8B3B3172fFFa5CA": {
             "jpg": "https://classicrewards.mypinata.cloud/ipfs/QmZHcKiTnGMPjdwEZ7dGGgtf1AZJwHYeHaYuXKxhonvckm/%20",
             "mp4": "https://classicrewards.mypinata.cloud/ipfs/QmbjmK3Ui26XWgtWPVCxkiTY9ybAyWkVdu32XC1PH463o1/%20"
         },
@@ -86,7 +86,7 @@ export const getcolorBasedOnChain = (chainId) => {
 
 export const getcolorBasedOnAddress = (address) => {
     const mintBoxColor = {
-        "0x0cC7f43A7FBBa594b57C9676ccc2ade02eb62D29": "#F1B80F",
+        "0xd5B60DeaE08d2d6D4B69eB9bc8B3B3172fFFa5CA": "#F1B80F",
         "0x208a67F5e2e0f58FC9b118618eE2c2324F2E2b4e": "#6FBD44"
     };
 

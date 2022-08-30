@@ -137,7 +137,7 @@
         "inputs": [
             {
                 "internalType": "uint256[]",
-                "name": "ID",
+                "name": "IDs",
                 "type": "uint256[]"
             },
             {
@@ -153,20 +153,7 @@
     },
     {
         "inputs": [],
-        "name": "DevMinted",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "PublicMinted",
+        "name": "MaxUnMinted",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -191,24 +178,6 @@
         "type": "function"
     },
     {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "ID",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "Reciever",
-                "type": "address"
-            }
-        ],
-        "name": "SpecificMint",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
         "inputs": [],
         "name": "SpecificMintOn",
         "outputs": [
@@ -225,7 +194,26 @@
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "id",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "UnMinted",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "num",
                 "type": "uint256"
             }
         ],
@@ -348,33 +336,7 @@
     },
     {
         "inputs": [],
-        "name": "maxDevMint",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
         "name": "maxMintAmount",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "maxPublicMint",
         "outputs": [
             {
                 "internalType": "uint256",
