@@ -4,7 +4,7 @@ import BinanceABI from "../abi/binanceABI.json"
 export const getSmartContractAddressByChainId = (chainId) => {
     const address = {
         56: "0xd5B60DeaE08d2d6D4B69eB9bc8B3B3172fFFa5CA",
-        61: "0x208a67F5e2e0f58FC9b118618eE2c2324F2E2b4e"
+        61: "0x1F7FEfBcdc8E1DD1DFdF508efaac0f10BA0961C5"
     };
 
     return address[chainId];
@@ -16,7 +16,7 @@ export const getWarriorLinksByAddress = (address) => {
             "jpg": "https://classicrewards.mypinata.cloud/ipfs/QmZHcKiTnGMPjdwEZ7dGGgtf1AZJwHYeHaYuXKxhonvckm/%20",
             "mp4": "https://classicrewards.mypinata.cloud/ipfs/QmbjmK3Ui26XWgtWPVCxkiTY9ybAyWkVdu32XC1PH463o1/%20"
         },
-        "0x208a67F5e2e0f58FC9b118618eE2c2324F2E2b4e": {
+        "0x1F7FEfBcdc8E1DD1DFdF508efaac0f10BA0961C5": {
             "jpg": "https://classicrewards.mypinata.cloud/ipfs/QmZtFmRktAzsi4coGnmP3LLmSMdfowDB34iRG6Ftzg8hUF/",
             "mp4": "https://classicrewards.mypinata.cloud/ipfs/QmZjpRshkApUfGwYnfzypqTMEv6m69LfWZVpEFkrQ99yFR/"
         }
@@ -87,7 +87,7 @@ export const getcolorBasedOnChain = (chainId) => {
 export const getcolorBasedOnAddress = (address) => {
     const mintBoxColor = {
         "0xd5B60DeaE08d2d6D4B69eB9bc8B3B3172fFFa5CA": "#F1B80F",
-        "0x208a67F5e2e0f58FC9b118618eE2c2324F2E2b4e": "#6FBD44"
+        "0x1F7FEfBcdc8E1DD1DFdF508efaac0f10BA0961C5": "#6FBD44"
     };
 
     return mintBoxColor[address];

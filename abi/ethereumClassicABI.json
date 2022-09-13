@@ -141,7 +141,7 @@
         "inputs": [
             {
                 "type": "uint256[]",
-                "name": "ID",
+                "name": "IDs",
                 "internalType": "uint256[]"
             },
             {
@@ -161,20 +161,7 @@
                 "internalType": "uint256"
             }
         ],
-        "name": "DevMinted",
-        "inputs": []
-    },
-    {
-        "type": "function",
-        "stateMutability": "view",
-        "outputs": [
-            {
-                "type": "uint256",
-                "name": "",
-                "internalType": "uint256"
-            }
-        ],
-        "name": "PublicMinted",
+        "name": "MaxUnMinted",
         "inputs": []
     },
     {
@@ -189,24 +176,6 @@
         ],
         "name": "SMdisable",
         "inputs": []
-    },
-    {
-        "type": "function",
-        "stateMutability": "nonpayable",
-        "outputs": [],
-        "name": "SpecificMint",
-        "inputs": [
-            {
-                "type": "uint256",
-                "name": "ID",
-                "internalType": "uint256"
-            },
-            {
-                "type": "address",
-                "name": "Reciever",
-                "internalType": "address"
-            }
-        ]
     },
     {
         "type": "function",
@@ -231,11 +200,30 @@
                 "internalType": "uint256"
             }
         ],
+        "name": "UnMinted",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "",
+                "internalType": "uint256"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": "",
+                "internalType": "uint256"
+            }
+        ],
         "name": "_generateRandom",
         "inputs": [
             {
                 "type": "uint256",
-                "name": "id",
+                "name": "num",
                 "internalType": "uint256"
             }
         ]
@@ -356,33 +344,7 @@
                 "internalType": "uint256"
             }
         ],
-        "name": "maxDevMint",
-        "inputs": []
-    },
-    {
-        "type": "function",
-        "stateMutability": "view",
-        "outputs": [
-            {
-                "type": "uint256",
-                "name": "",
-                "internalType": "uint256"
-            }
-        ],
         "name": "maxMintAmount",
-        "inputs": []
-    },
-    {
-        "type": "function",
-        "stateMutability": "view",
-        "outputs": [
-            {
-                "type": "uint256",
-                "name": "",
-                "internalType": "uint256"
-            }
-        ],
-        "name": "maxPublicMint",
         "inputs": []
     },
     {
