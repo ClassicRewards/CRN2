@@ -59,7 +59,7 @@ export function MintArea({ contract, updateMintCount }) {
   }  
 
   if (!maxMintingSupply) {
-    maxMintingSupply = 6000;
+    maxMintingSupply = 10000;
   }
 
   if (!colorBasedOnChain) {

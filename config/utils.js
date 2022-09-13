@@ -68,7 +68,7 @@ export const getAllChainIds = () => {
 
 export const getMaxMintingSupplyByChainId = (chainId) => {
     const mintingPrice = {
-        56: 6000,
+        56: 10000,
         61: 10000
     };
 
