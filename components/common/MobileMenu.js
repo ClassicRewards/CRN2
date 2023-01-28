@@ -89,7 +89,7 @@ const MobileMenu = ({ contract, setContract }) => {
                   </a>
                 </ListItem>
                 <ListItem mb={3}>
-                  <a href="/https://stamfordskirmish.com/" target="_blank">
+                  <a href="https://stamfordskirmish.com/" target="_blank">
                     BATTLE
                   </a>
                 </ListItem>

@@ -31,7 +31,7 @@ const DesktopMenu = ({ contract, setContract }) => {
           </a>
         </li>
         <li className={styles.menuBtn}>
-          <a href="/https://stamfordskirmish.com/" target="_blank">
+          <a href="https://stamfordskirmish.com/" target="_blank">
             BATTLE
           </a>
         </li>
