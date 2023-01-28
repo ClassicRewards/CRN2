@@ -88,7 +88,11 @@ const MobileMenu = ({ contract, setContract }) => {
                     BNB AUDIT
                   </a>
                 </ListItem>
-                <MobileNavButton targetElementId="battle" label="BATTLE" onClose={onClose} />
+                <ListItem mb={3}>
+                  <a href="/https://stamfordskirmish.com/" target="_blank">
+                    BATTLE
+                  </a>
+                </ListItem>
                 <MobileNavButton targetElementId="lore" label="LORE" onClose={onClose} />
                 <MobileNavButton targetElementId="roadmap" label="ROADMAP" onClose={onClose} />
                 <MobileNavButton targetElementId="team" label="TEAM" onClose={onClose} />

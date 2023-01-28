@@ -30,7 +30,11 @@ const DesktopMenu = ({ contract, setContract }) => {
             BNB AUDIT
           </a>
         </li>
-        <DesktopNavButton targetElementId="battle" label="BATTLE" />
+        <li className={styles.menuBtn}>
+          <a href="/https://stamfordskirmish.com/" target="_blank">
+            BATTLE
+          </a>
+        </li>
         <DesktopNavButton targetElementId="lore" label="LORE" />
         <DesktopNavButton targetElementId="roadmap" label="ROADMAP" />
         <DesktopNavButton targetElementId="team" label="TEAM" />
