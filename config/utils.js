@@ -45,8 +45,8 @@ export const getNetworkNameByChainId = (chainId) => {
 
 export const getMintingPriceByChainId = (chainId) => {
     const mintingPrice = {
-        56: "0.2",
-        61: "2"
+        56: "0.1",
+        61: "0.5"
     };
 
     return mintingPrice[chainId];

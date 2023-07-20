@@ -55,7 +55,7 @@ export function MintArea({ contract, updateMintCount }) {
   }  
   
   if (!mintingPrice) {
-    mintingPrice = "0.2";
+    mintingPrice = "0.1";
   }  
 
   if (!maxMintingSupply) {
