@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { ethers } from "ethers";
-import keccak256 from "keccak256";
-import MerkleTree from "merkletreejs";
 import { Center, Input, Button, Box, Text, Divider, Flex } from "@chakra-ui/react";
 import { ToastContainer, toast } from "react-toastify";
 import ReactLoading from "react-loading";
