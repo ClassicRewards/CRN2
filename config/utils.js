@@ -105,7 +105,7 @@ export const getABIBasedOnChain = (chainId) => {
 export const getRpcBasedOnChain = (chainId) => {
     const rpc = {
         56: "https://bsc-dataseed.binance.org/",
-        61: "https://www.ethercluster.com/etc",
+        61: "https://etc.rivet.link",
     }
 
     return rpc[chainId];
