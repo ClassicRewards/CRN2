@@ -61,7 +61,7 @@ export function ConnectButton({ chain, networkName, chainId, setContract }) {
             rpc: {
               4: "https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161", // rinkeby  testnet
               56: "https://bsc-dataseed.binance.org/", // binance mainnet
-              61: "https://www.ethercluster.com/etc", // ethereum classic mainnet
+              61: "https://etc.rivet.link", // ethereum classic mainnet
               97: "https://data-seed-prebsc-1-s1.binance.org:8545", // binance testnet
             },
           },
